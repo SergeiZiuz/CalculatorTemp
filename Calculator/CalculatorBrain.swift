@@ -68,6 +68,10 @@ struct CalculatorBrain {
     
     private var pendingBinaryOperation: PendingBinaryOperation?
     
+    var resultIsPending: Bool {
+        return pendingBinaryOperation != nil
+    }
+    
     private struct PendingBinaryOperation {
         let function: (Double, Double) -> Double
         let firstOperand: Double

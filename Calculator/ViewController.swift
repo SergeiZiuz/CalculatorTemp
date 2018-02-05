@@ -18,13 +18,13 @@ class ViewController: UIViewController {
         let digit = sender.currentTitle!
         if userIsInTheMiddleOfTyping {
             let textCurrentlyInDisplay = display.text!
-            if textCurrentlyInDisplay.contains(".") && digit.contains(".") {
-                
-            } else {
+            if (digit != ".") || !(textCurrentlyInDisplay.contains(".")) {
                 display.text = textCurrentlyInDisplay + digit
             }
+            
         } else {
             display.text = digit.contains(".") ? "0" + digit : digit //(display.text ?? "0") if current display equal 0 and digit equal . then write "0." else "."
+//            display.text = digit
             userIsInTheMiddleOfTyping = true
         }
         print("\(digit) was touched")

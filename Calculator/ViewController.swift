@@ -23,8 +23,7 @@ class ViewController: UIViewController {
             }
             
         } else {
-            display.text = digit.contains(".") ? "0" + digit : digit //(display.text ?? "0") if current display equal 0 and digit equal . then write "0." else "."
-//            display.text = digit
+            display.text = digit.contains(".") ? "0" + digit : digit //(display.text ?? "0") if current display = 0 and digit = . then write "0." else "."
             userIsInTheMiddleOfTyping = true
         }
         print("\(digit) was touched")

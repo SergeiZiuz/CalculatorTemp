@@ -97,7 +97,7 @@ struct CalculatorBrain {
             if pendingBinaryOperation == nil {
                 return descriptionAccumulator
             } else {
-                return pendingBinaryOperation!.descriptionFunction(pendingBinaryOperation!.descriptionOperand, descriptionAccumulator ?? "")
+                return pendingBinaryOperation!.descriptionFunction(pendingBinaryOperation!.descriptionOperand, descriptionAccumulator ?? " ")
             }
         }
     }
@@ -120,6 +120,7 @@ struct CalculatorBrain {
     mutating func setOperand(_ operand: Double) {
         accumulator = operand
         if let value = accumulator {
+//            descriptionAccumulator = formatter.string(from: NSNumber(value:value)) ?? ""
             descriptionAccumulator = String(value)
         }
     }

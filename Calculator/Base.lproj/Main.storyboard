@@ -408,6 +408,7 @@
                     </view>
                     <connections>
                         <outlet property="display" destination="IhZ-4V-fE5" id="UCg-28-L98"/>
+                        <outlet property="history" destination="WE1-TV-b5f" id="fKS-a2-4K8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

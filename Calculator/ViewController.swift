@@ -53,7 +53,7 @@ class ViewController: UIViewController {
             displayValue = result
         }
         if let description = brain.description {
-            history.text = description + (brain.resultIsPending ? " ..." : " =")
+            history.text = description  + (brain.resultIsPending ? " ..." : " =")
         }
     }
     

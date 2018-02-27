@@ -63,11 +63,6 @@ struct CalculatorBrain {
                     if descriptionFunction == nil {
                         descriptionFunction = {$0 + " " + symbol + " " + $1}
                     }
-//                    if pendingBinaryOperation != nil {
-//                        performPendingBinaryOperation()
-//                        pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator!)
-//                        break
-//                    }
                     pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator!, descriptionFunction: descriptionFunction!, descriptionOperand: descriptionAccumulator!)
                     accumulator = nil
                     descriptionAccumulator = nil
@@ -93,12 +88,10 @@ struct CalculatorBrain {
     }
     
     var description: String? {
-        get {
-            if pendingBinaryOperation == nil {
-                return descriptionAccumulator
-            } else {
-                return pendingBinaryOperation!.descriptionFunction(pendingBinaryOperation!.descriptionOperand, descriptionAccumulator ?? " ")
-            }
+        if pendingBinaryOperation == nil {
+            return descriptionAccumulator
+        } else {
+            return pendingBinaryOperation!.descriptionFunction(pendingBinaryOperation!.descriptionOperand, descriptionAccumulator ?? "")
         }
     }
     
@@ -126,8 +119,10 @@ struct CalculatorBrain {
     }
     
     var result: Double? {
-        get {
+        if pendingBinaryOperation == nil {
             return accumulator
+        } else {
+            return pendingBinaryOperation!.function(pendingBinaryOperation!.firstOperand, accumulator ?? 0)
         }
     }
     

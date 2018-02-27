@@ -17,6 +17,7 @@ class ViewController: UIViewController {
 
     @IBAction func touchDigit(_ sender: UIButton) {
         let digit = sender.currentTitle!
+        print("\(digit) was touched")
         if userIsInTheMiddleOfTyping {
             let textCurrentlyInDisplay = display.text!
             if (digit != ".") || !(textCurrentlyInDisplay.contains(".")) {
@@ -27,7 +28,6 @@ class ViewController: UIViewController {
             display.text = digit.contains(".") ? "0" + digit : digit //(display.text ?? "0") if current display = 0 and digit = . then write "0." else "."
             userIsInTheMiddleOfTyping = true
         }
-        print("\(digit) was touched")
     }
     
     var displayValue: Double {
@@ -42,6 +42,7 @@ class ViewController: UIViewController {
     private var brain = CalculatorBrain()
     
     @IBAction func performOperation(_ sender: UIButton) {
+        print("\(sender.currentTitle!) was touch")
         if userIsInTheMiddleOfTyping {
             brain.setOperand(displayValue)
             userIsInTheMiddleOfTyping = false
@@ -53,7 +54,7 @@ class ViewController: UIViewController {
             displayValue = result
         }
         if let description = brain.description {
-            history.text = description  + (brain.resultIsPending ? " ..." : " =")
+            history.text = description + (brain.resultIsPending ? " ..." : " =")
         }
     }
     

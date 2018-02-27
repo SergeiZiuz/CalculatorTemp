@@ -119,10 +119,11 @@ struct CalculatorBrain {
     }
     
     var result: Double? {
+//        return accumulator
         if pendingBinaryOperation == nil {
             return accumulator
         } else {
-            return pendingBinaryOperation!.function(pendingBinaryOperation!.firstOperand, accumulator ?? 0)
+            return pendingBinaryOperation!.firstOperand
         }
     }
     

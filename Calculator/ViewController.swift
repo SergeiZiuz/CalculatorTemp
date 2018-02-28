@@ -58,5 +58,18 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func clearAll(_ sender: UIButton) {
+        brain.clear()
+        displayValue = 0
+        history.text = " "
+    }
+    
+    @IBAction func backspace(_ sender: UIButton) {
+        guard userIsInTheMiddleOfTyping && !display.text!.isEmpty else { return }
+        display.text = String(display.text!.dropLast())
+        if display.text!.isEmpty {
+            displayValue = 0
+        }
+    }
 }
 

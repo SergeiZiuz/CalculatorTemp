@@ -119,12 +119,18 @@ struct CalculatorBrain {
     }
     
     var result: Double? {
-//        return accumulator
-        if pendingBinaryOperation == nil {
-            return accumulator
-        } else {
-            return pendingBinaryOperation!.firstOperand
-        }
+        return accumulator
+//        if pendingBinaryOperation == nil {
+//            return accumulator
+//        } else {
+//            return pendingBinaryOperation!.firstOperand
+//        }
+    }
+    
+    mutating func clear() {
+        accumulator = nil
+        descriptionAccumulator = nil
+        pendingBinaryOperation = nil
     }
     
 }

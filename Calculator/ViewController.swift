@@ -12,6 +12,13 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var history: UILabel!
+    @IBOutlet weak var point: UIButton! {
+        didSet {
+            point.setTitle(decilalSeparator, for: UIControlState())
+        }
+    }
+    
+    let decilalSeparator = formatter.decimalSeparator ?? "."
     
     var userIsInTheMiddleOfTyping = false
 
@@ -30,13 +37,25 @@ class ViewController: UIViewController {
         }
     }
     
-    var displayValue: Double {
+    var displayValue: Double? {
         get {
-            return Double(display.text!)!
+            if let text = display.text, let value = formatter.number(from: text) as? Double {
+                return value
+            }
+            return nil //Double(display.text!)!
         }
         set {
-            display.text = String(newValue)
+            if let value = newValue {
+                display.text = formatter.string(from: NSNumber(value:value))
+            }
+            if let description = brain.description {
+                history.text = description + (brain.resultIsPending ? " …" : " =")
+            }
         }
+//        set {
+//            display.text = formatter.string(from: NSNumber(value:newValue))
+////            display.text = String(newValue)
+//        }
     }
     
     private var brain = CalculatorBrain()
@@ -44,18 +63,24 @@ class ViewController: UIViewController {
     @IBAction func performOperation(_ sender: UIButton) {
         print("\(sender.currentTitle!) was touch")
         if userIsInTheMiddleOfTyping {
-            brain.setOperand(displayValue)
+            if let value = displayValue {
+                brain.setOperand(value)
+            }
             userIsInTheMiddleOfTyping = false
         }
         if let mathematicalSymbol = sender.currentTitle {
             brain.performOperation(mathematicalSymbol)
         }
-        if let result = brain.result {
-            displayValue = result
-        }
-        if let description = brain.description {
-            history.text = description + (brain.resultIsPending ? " ..." : " =")
-        }
+        
+        displayValue = brain.result
+        
+//        if let result = brain.result {
+//            displayValue = result
+//        }
+        
+//        if let description = brain.description {
+//            history.text = description + (brain.resultIsPending ? " ..." : " =")
+//        }
     }
     
     @IBAction func clearAll(_ sender: UIButton) {

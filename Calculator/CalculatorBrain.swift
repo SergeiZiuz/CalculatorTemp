@@ -113,8 +113,8 @@ struct CalculatorBrain {
     mutating func setOperand(_ operand: Double) {
         accumulator = operand
         if let value = accumulator {
-//            descriptionAccumulator = formatter.string(from: NSNumber(value:value)) ?? ""
-            descriptionAccumulator = String(value)
+            descriptionAccumulator = formatter.string(from: NSNumber(value:value)) ?? ""
+//            descriptionAccumulator = String(value)
         }
     }
     
@@ -134,3 +134,13 @@ struct CalculatorBrain {
     }
     
 }
+
+let formatter:NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.maximumFractionDigits = 6
+    formatter.notANumberSymbol = "Error"
+    formatter.groupingSeparator = " "
+    formatter.locale = Locale.current
+    return formatter
+} ()
